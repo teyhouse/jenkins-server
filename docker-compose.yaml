@@ -1,0 +1,27 @@
+version: "3"
+services:
+  jenkins:
+    image: jenkins-docker-blueocean:2.395
+    container_name: jenkins
+    volumes:
+      - "./jenkins-data:/var/jenkins_home"
+      - "./jenkins-docker-certs:/certs/client:ro"
+    environment:
+      - "DOCKER_HOST=tcp://socat:2375"
+      - "DOCKER_CERT_PATH=/certs/client"
+      - "DOCKER_TLS_VERIFY=1"
+    ports:
+      - 8080:8080
+      - 50000:50000
+    links:
+      - socat
+    restart: always
+
+  socat:
+    container_name: socat
+    image: bpack/socat
+    command: TCP4-LISTEN:2375,fork,reuseaddr UNIX-CONNECT:/var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    expose:
+      - "2375"
