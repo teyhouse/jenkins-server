@@ -18,9 +18,9 @@ Execute the VSCode-Task or run the following command:
   
 To start the Jenkins server, simply run the following commands:
   
-`mkdir jenkins-data jenkins-docker-certs` (this will ensure the right folder-permissions)
-`docker-compose up -d` 
-
+`mkdir jenkins-data jenkins-docker-certs` (this will ensure the right folder-permissions)  
+`docker-compose up -d`  
+  
 This will start a Jenkins server container and map its default port (8080) to the host machine's port 8080.
 
 To access the Jenkins server, open a web browser and go to `http://localhost:8080`. You will be prompted to enter the initial admin password which can be found by running the following command:
